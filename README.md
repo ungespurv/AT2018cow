@@ -1,10 +1,10 @@
 # AT2018cow
-Scripts I wrote for my Master Thesis
+I wrote these scripts for my Master's Thesis. 
 
-Initial paper:
-https://arxiv.org/abs/1810.10880
+The original paper regarding AT2018cow can be found at https://arxiv.org/abs/1810.10880. 
 
-What I did?
+What did I do? 
+
 - I read the maps to arrays using function fits.getdata() from AstroPy library
 - for every map of the galaxy (in specific wavelength), I chose a quite large area outside of the galaxy, and I've determined the standard deviation.
 - I estimated galactial extinction for each wavelength
