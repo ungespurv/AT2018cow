@@ -22,5 +22,5 @@ def a_v_map_creation(first_frequency_map, corrected, comparison_map, standard_de
 def a_lambda_calculation(a_v_map, k_lambda_for_specific_wavelength, a_lambda_output_map):
     """Calculates A_v map to A_lambda map"""
     r_v = 4.05
-    for pixel in a_v_map:
-        a_lambda_output_map.append((k_lambda_for_specific_wavelength * a_v_map[pixel]) / r_v)
+    for i, pixel in enumerate(a_v_map):
+        a_lambda_output_map.append((k_lambda_for_specific_wavelength * a_v_map[i]) / r_v)
