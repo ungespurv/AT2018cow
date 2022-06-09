@@ -32,4 +32,9 @@ A_lambda_f_0_iii = functions.a_lambda_calculation(A_V_f_o_iii, k_lambda_values[3
 A_lambda_f_s_ii = functions.a_lambda_calculation(A_V_f_s_ii, k_lambda_values[4])
 A_lambda = [A_lambda_f_Ha, A_lambda_f_Hb, A_lambda_f_n_ii, A_lambda_f_0_iii, A_lambda_f_s_ii]
 
-print(A_lambda_f_Ha)
+functions.create_fits_file(A_lambda_f_Ha, 'A_lambda_f_Ha.fits')
+functions.create_fits_file(A_lambda_f_Hb, 'A_lambda_f_Hb.fits')
+functions.create_fits_file(A_lambda_f_n_ii, 'A_lambda_f_n_ii.fits')
+functions.create_fits_file(A_lambda_f_0_iii, 'A_lambda_f_0_iii.fits')
+functions.create_fits_file(A_lambda_f_s_ii, 'A_lambda_f_s_ii.fits')
+

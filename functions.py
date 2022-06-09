@@ -1,4 +1,5 @@
 import numpy as np
+from astropy.io import fits
 
 
 def a_v_map_creation(first_frequency_map, comparison_map, standard_deviation):
@@ -19,6 +20,7 @@ def a_v_map_creation(first_frequency_map, comparison_map, standard_deviation):
 def k_lambda(wavelength):
     """Calculates the k(lambda) value for each wavelength"""
     r_v = 4.05
+    wavelength = round(wavelength * 0.001, 3)
     if wavelength < 630:
         return 2.659 * (1.509 / wavelength - 0.198 / wavelength ** 2 - 0.011 / wavelength ** 3) + r_v
     else:
@@ -31,3 +33,12 @@ def a_lambda_calculation(a_v_map, k_lambda_for_specific_wavelength):
     tmp_list = a_v_map
     tmp_list = np.apply_along_axis(lambda x: (k_lambda_for_specific_wavelength * x) / r_v, axis=0, arr=tmp_list)
     return tmp_list
+
+
+def create_fits_file(a_lambda_map, filename):
+    """Creates a .fits file from a corrected A_lambda map of the galaxy"""
+    tmp_map = a_lambda_map
+    hdu = fits.PrimaryHDU(tmp_map)
+    hdul = fits.HDUList([hdu])
+    hdul.writeto(filename)
+    return 'Map created!'
