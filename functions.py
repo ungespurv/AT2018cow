@@ -6,8 +6,8 @@ from astropy.io import fits
 
 def a_v_map_creation(first_frequency_map, comparison_map, standard_deviation):
     """Scales a map to a certain frequency"""
-    tmp_list = first_frequency_map
-    tmp_comparison = comparison_map
+    tmp_list = np.copy(first_frequency_map)
+    tmp_comparison = np.copy(comparison_map)
     for row in range(len(tmp_list)):
         for value in range(len(tmp_list[0])):
             if (
@@ -23,10 +23,12 @@ def a_v_map_creation(first_frequency_map, comparison_map, standard_deviation):
                     / 2.86
                 ) ** 2.114
     # f_Ha = tmp_list # teraz jest f_Ha
+    print(tmp_list[193][176])
     tmp_list = np.apply_along_axis(
         lambda x: 2.5 * np.log10(x), axis=-1, arr=tmp_list
     )  # -> A_V
-
+    print(first_frequency_map[193][176])
+    print(tmp_list[193][176])
     return tmp_list
 
 
@@ -52,7 +54,7 @@ def k_lambda(wavelength):
 def a_lambda_calculation(a_v_map, k_lambda_for_specific_wavelength):
     """Calculates A_v map to A_lambda map"""
     r_v = 4.05
-    tmp_list = a_v_map
+    tmp_list = np.copy(a_v_map)
     tmp_list = np.apply_along_axis(
         lambda x: (k_lambda_for_specific_wavelength * x) / r_v, axis=0, arr=tmp_list
     )
@@ -61,7 +63,7 @@ def a_lambda_calculation(a_v_map, k_lambda_for_specific_wavelength):
 
 def create_fits_file(a_lambda_map, filename):
     """Creates a .fits file from a corrected A_lambda map of the galaxy"""
-    tmp_map = a_lambda_map
+    tmp_map = np.copy(a_lambda_map)
     hdu = fits.PrimaryHDU(tmp_map)
     fits.HDUList([hdu]).writeto(filename, overwrite=True)
     return 1
@@ -69,7 +71,7 @@ def create_fits_file(a_lambda_map, filename):
 
 def luminosity_from_flux(flux, redshift):
     """Calculates the luminosity from the famous equation."""
-    tmp_map = flux
+    tmp_map = np.copy(flux)
     distance = astropy.coordinates.Distance(z=redshift)
     distance = distance.to(u.cm).value
     # 0.0136
@@ -86,7 +88,7 @@ def luminosity_from_flux(flux, redshift):
 def calculate_sfr(l_map):
     """Calculates SFR"""
     constant = 7.9e-42
-    tmp_map = l_map
+    tmp_map = np.copy(l_map)
     return constant * tmp_map
 
 
