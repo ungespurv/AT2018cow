@@ -13,9 +13,4 @@ What did I do?
 - I estimated galactial extinction for each wavelength
 - I used Calzetti's atenuation law (http://www.bo.astro.it/~micol/Hyperz/old_public_v1/hyperz_manual1/node10.html)
 - convert corrected map to FITS again (https://docs.astropy.org/en/stable/io/fits/index.html)
-- I've calculated aperture photmotrey in two circular regions Apertura pierwsza (X:148, Y:169, R=80.17) = 5.214709577201061 -> cała galaktyka (bez szumu)
-Apertura druga (X:145, Y:175, R=7.24) = 1.8994402738527763 -> jasna część w środku
-
-
-Current commit only for better debugging! (28.12.22)
-To be continued...
+- I've calculated aperture photmotrey in two circular regions

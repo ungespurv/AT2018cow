@@ -22,13 +22,7 @@ def a_v_map_creation(first_frequency_map, comparison_map, standard_deviation):
                     (first_frequency_map[row][value] / tmp_comparison[row][value])
                     / 2.86
                 ) ** 2.114
-    # f_Ha = tmp_list # teraz jest f_Ha
-    print(tmp_list[193][176])
-    tmp_list = np.apply_along_axis(
-        lambda x: 2.5 * np.log10(x), axis=-1, arr=tmp_list
-    )  # -> A_V
-    print(first_frequency_map[193][176])
-    print(tmp_list[193][176])
+    tmp_list = np.apply_along_axis(lambda x: 2.5 * np.log10(x), axis=-1, arr=tmp_list)
     return tmp_list
 
 
@@ -69,14 +63,13 @@ def create_fits_file(a_lambda_map, filename):
     return 1
 
 
-def luminosity_from_flux(flux, redshift):
+def luminosity_from_flux(flux, a_f_map, redshift):
     """Calculates the luminosity from the famous equation."""
-    tmp_map = np.copy(flux)
+    tmp_flux = np.copy(flux)
+    tmp_a_f_map = np.copy(a_f_map)
+    tmp_map = tmp_flux * 10 ** (0.4 * tmp_a_f_map)
     distance = astropy.coordinates.Distance(z=redshift)
     distance = distance.to(u.cm).value
-    # 0.0136
-    # 19.500477
-    # 1.878712872817573e+26
     tmp_map = np.apply_along_axis(
         lambda x: 4.0 * np.pi * (distance**2) * x / (1 + redshift) * 10e-20,
         axis=0,
@@ -94,9 +87,6 @@ def calculate_sfr(l_map):
 
 def metallicity(l_ha, l_n_ii, l_s_ii):
     """Calculates a value of 12+log(O/H)"""
-    y = np.log10(l_n_ii / l_s_ii) + 0.264 * (
-        np.log10(l_n_ii / l_ha)
-    )  # jeśli s_ii lub h_ii <0, to nie da sie wyliczyc metalicznosci/
+    y = np.log10(l_n_ii / l_s_ii) + 0.264 * (np.log10(l_n_ii / l_ha))
     desired_value = 8.77 + y + 0.45 * (y + 0.3) ** 5
-    # desired_value = 8.77 + y
     return desired_value
