@@ -1,5 +1,5 @@
 from astropy.io import fits
-from photutils import CircularAperture, aperture_photometry
+from photutils.aperture import CircularAperture, aperture_photometry
 
 import functions
 
@@ -58,8 +58,4 @@ aperture_2 = CircularAperture((145, 175), r=7.24)
 phot_1 = aperture_photometry(sfr_ha, aperture_1)
 phot_2 = aperture_photometry(sfr_ha, aperture_2)
 aperture_l_ha = CircularAperture((148, 169), r=80.17)
-phot_3 = aperture_photometry(L_Ha, aperture_l_ha)
-phot_3 = aperture_photometry(L_Ha, aperture_l_ha)
-phot_3 = aperture_photometry(L_Ha, aperture_l_ha)
-phot_3 = aperture_photometry(L_Ha, aperture_l_ha)
 phot_3 = aperture_photometry(L_Ha, aperture_l_ha)

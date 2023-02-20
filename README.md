@@ -12,5 +12,6 @@ What did I do?
 - for every map of the galaxy (in specific wavelength), I chose a quite large area outside of the galaxy, and I've determined the standard deviation.
 - I estimated galactial extinction for each wavelength
 - I used Calzetti's atenuation law (http://www.bo.astro.it/~micol/Hyperz/old_public_v1/hyperz_manual1/node10.html)
-- convert corrected map to FITS again (https://docs.astropy.org/en/stable/io/fits/index.html)
-- I've calculated aperture photmotrey in two circular regions
+- Converted corrected map to FITS again (https://docs.astropy.org/en/stable/io/fits/index.html)
+- I've calculated aperture photometry in two circular regions
+- Later on, I've selected 11 regions in space and calculated aperture photometry for them using radius=...
